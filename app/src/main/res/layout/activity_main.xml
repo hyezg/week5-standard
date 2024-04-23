@@ -96,6 +96,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/rv_item"
         android:layout_width="match_parent"
         android:layout_height="0dp"

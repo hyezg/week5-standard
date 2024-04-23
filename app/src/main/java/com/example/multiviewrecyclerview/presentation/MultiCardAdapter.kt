@@ -1,14 +1,14 @@
 package com.standard.multiviewtyperecyclerview.presentation
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.multiviewrecyclerview.R
 import com.example.multiviewrecyclerview.data.Card
 import com.example.multiviewrecyclerview.databinding.ItemBlueCardBinding
 import com.example.multiviewrecyclerview.databinding.ItemLightBlueCardBinding
 import com.example.multiviewrecyclerview.databinding.ItemOrangeCardBinding
+import com.example.multiviewrecyclerview.presentation.DetailActivity
 import com.example.multiviewrecyclerview.presentation.MultiViewEnum
 import java.lang.IllegalArgumentException
 
@@ -19,6 +19,70 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
     var cardList = listOf<Card>()
 
 
+    class BlueTypeViewHolder(private val binding: ItemBlueCardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(card: Card) {
+            val context = binding.root.context //adapter에서 clickevent 하면안됨
+            binding.apply {
+                tvUserName.text = card.userName
+                tvCardNum.text = card.cardNumber
+                tvCardType.text = card.cardType
+                tvCardPeriod.text = card.period
+                tvBalance.text = card.balance.toString()
+                tvCardManager.text = card.cardManager
+                cardFirst.setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_CARD, card)
+                    context.startActivity(intent)
+
+                }
+            }
+
+        }
+    }
+
+    class LightBlueTypeViewHolder(private val binding: ItemLightBlueCardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(card: Card) {
+            val context = binding.root.context
+            binding.apply {
+                tvUserName.text = card.userName
+                tvCardNum.text = card.cardNumber
+                tvCardType.text = card.cardType
+                tvCardPeriod.text = card.period
+                tvBalance.text = card.balance.toString()
+                tvCardManager.text = card.cardManager
+                cardSecond.setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_CARD, card)
+                    context.startActivity(intent)
+                }
+            }
+
+        }
+    }
+
+    class OrangeTypeViewHolder(private val binding: ItemOrangeCardBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(card: Card) {
+            val context = binding.root.context
+            binding.apply {
+                tvUserName.text = card.userName
+                tvCardNum.text = card.cardNumber
+                tvCardType.text = card.cardType
+                tvCardPeriod.text = card.period
+                tvBalance.text = card.balance.toString()
+                tvCardManager.text = card.cardManager
+                cardThird.setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_CARD, card)
+                    context.startActivity(intent)
+                }
+            }
+        }
+    }
+
     //viewholder 생성
     //ViewHolder에 연결된 view 생성, 초기화
     //multi view type 처리
@@ -26,8 +90,9 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
         //multi view type을 구현하는 item layout 연결
         return when (viewType) {
             MultiViewEnum.BLUE.viewType -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_blue_card,false)
-                return ViewHolder(ItemBlueCardBinding.bind(view),onClick)
+                val binding =
+                    ItemBlueCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                BlueTypeViewHolder(binding)
             }
 
             MultiViewEnum.LIGHTBLUE.viewType -> {
@@ -54,9 +119,6 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
         }
     }
 
-    override fun getItemCount(): Int {
-        return cardList.size
-    }
 
     //viewHolder와 data 바인딩
     //클릭 이벤트 처리
@@ -104,46 +166,8 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
         }
     }
 
-    //item layout의 ui값 뿌려주기
-    class BlueTypeViewHolder(private val binding: ItemBlueCardBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
-            binding.apply {
-                tvUserName.text = card.userName
-                tvCardNum.text = card.cardNumber
-                tvCardType.text = card.cardType
-                tvCardPeriod.text = card.period
-                tvBalance.text = card.balance.toString()
-                tvCardManager.text = card.cardManager
-            }
-        }
+    override fun getItemCount(): Int {
+        return cardList.size
     }
 
-    class LightBlueTypeViewHolder(private val binding: ItemLightBlueCardBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
-            binding.apply {
-                tvUserName.text = card.userName
-                tvCardNum.text = card.cardNumber
-                tvCardType.text = card.cardType
-                tvCardPeriod.text = card.period
-                tvBalance.text = card.balance.toString()
-                tvCardManager.text = card.cardManager
-            }
-        }
-    }
-
-    class OrangeTypeViewHolder(private val binding: ItemOrangeCardBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
-            binding.apply {
-                tvUserName.text = card.userName
-                tvCardNum.text = card.cardNumber
-                tvCardType.text = card.cardType
-                tvCardPeriod.text = card.period
-                tvBalance.text = card.balance.toString()
-                tvCardManager.text = card.cardManager
-            }
-        }
-    }
 }

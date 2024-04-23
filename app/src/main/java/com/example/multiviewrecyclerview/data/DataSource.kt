@@ -17,4 +17,10 @@ class DataSource {
     }*/
     fun getCardList() = cardList()
 
+    fun getCardForName(name: String) : Card {
+        cardList().let {cards ->
+            return cards.first { it.userName==name}
+
+        }
+    }
 }

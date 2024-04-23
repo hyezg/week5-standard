@@ -8,19 +8,20 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="225sp"
-        android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bg_frame_orange_radius_20"
         android:clipToPadding="true"
-        android:translationZ="5dp"
         android:padding="10dp"
+        android:translationZ="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_third"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +85,8 @@
                 android:layout_marginBottom="16dp"
                 android:text="$잔액.잔액"
                 android:textColor="@color/white"
-                android:textSize="22sp"
                 android:textFontWeight="700"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_card_num" />
 
